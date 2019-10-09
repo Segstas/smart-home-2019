@@ -1,8 +1,11 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.HomeParts;
+
+import ru.sbt.mipt.oop.HomeDevices.Door;
+import ru.sbt.mipt.oop.HomeDevices.Light;
 
 import java.util.Collection;
 
-public class Room {
+public abstract class Room {
     private Collection<Light> lights;
     private Collection<Door> doors;
     private String name;

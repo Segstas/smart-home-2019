@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.HomeDevices;
 
 public class Door {
     private final String id;
