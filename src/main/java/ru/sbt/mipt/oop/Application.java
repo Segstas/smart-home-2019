@@ -11,11 +11,12 @@ import static ru.sbt.mipt.oop.Events.EventProduser.getNextSensorEvent;
 
 public class Application {
     SmartHomeReader smartHomeReader;
+    SmartHome smartHome;
 
     public void main(String... args) throws IOException {
         // считываем состояние дома из файла
-        smartHomeReader = new SmartHomeReaderJSON();
-        SmartHome smartHome = smartHomeReader.read();
+        this.smartHomeReader = new SmartHomeReaderJSON();
+        this.smartHome = smartHomeReader.read();
 
         // начинаем цикл обработки событий
         SensorEvent event = getNextSensorEvent();
