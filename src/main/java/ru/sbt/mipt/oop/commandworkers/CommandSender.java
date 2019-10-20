@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.CommandWorkers;
+package ru.sbt.mipt.oop.commandworkers;
 
 public class CommandSender {
 

@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.HomeParts;
+package ru.sbt.mipt.oop.homeparts;
 
 import java.util.ArrayList;
 import java.util.Collection;

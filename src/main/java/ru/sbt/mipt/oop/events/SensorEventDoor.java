@@ -1,16 +1,26 @@
-package ru.sbt.mipt.oop.Events;
+package ru.sbt.mipt.oop.events;
 
-import ru.sbt.mipt.oop.EventTypes.SensorEventType;
-import ru.sbt.mipt.oop.HomeDevices.Door;
-import ru.sbt.mipt.oop.HomeParts.Room;
-import ru.sbt.mipt.oop.HomeParts.SmartHome;
+import ru.sbt.mipt.oop.eventtypes.SensorEventType;
+import ru.sbt.mipt.oop.homedevices.Door;
+import ru.sbt.mipt.oop.homeparts.Room;
+import ru.sbt.mipt.oop.homeparts.SmartHome;
+import ru.sbt.mipt.oop.scenarios.LightScenarios;
 
-import static ru.sbt.mipt.oop.EventTypes.SensorEventTypeDoor.DOOR_OPEN;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoor.DOOR_OPEN;
 
 public class SensorEventDoor extends SensorEvent {
 
     public SensorEventDoor(SensorEventType type, String objectId) {
         super(type, objectId);
+    }
+
+
+    @Override
+    public String toString() {
+        return "SensorEvent{" +
+                "type=" + this.getType() +
+                ", objectId='" + this.getObjectId() + '\'' +
+                '}';
     }
 
     @Override
@@ -28,7 +38,7 @@ public class SensorEventDoor extends SensorEvent {
                         // если мы получили событие о закрытие двери в холле - это значит, что была закрыта входная дверь.
                         // в этом случае мы хотим автоматически выключить свет во всем доме (это же умный дом!)
                         if (room.getName().equals("hall")) {
-                            SensorEventLight.allLightsOff(smartHome);
+                            LightScenarios.allLightsOff(smartHome);
                         }
                     }
                 }

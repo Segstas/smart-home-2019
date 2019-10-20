@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.HomeDevices;
+package ru.sbt.mipt.oop.homedevices;
 
 public class Light {
     private final String id;

@@ -1,29 +1,28 @@
-package ru.sbt.mipt.oop.Events;
+package ru.sbt.mipt.oop.events;
 
-import ru.sbt.mipt.oop.CommandWorkers.CommandSender;
-import ru.sbt.mipt.oop.CommandWorkers.CommandType;
-import ru.sbt.mipt.oop.CommandWorkers.SensorCommand;
-import ru.sbt.mipt.oop.EventTypes.SensorEventType;
-import ru.sbt.mipt.oop.HomeDevices.Light;
-import ru.sbt.mipt.oop.HomeParts.Room;
-import ru.sbt.mipt.oop.HomeParts.SmartHome;
+import ru.sbt.mipt.oop.commandworkers.CommandSender;
+import ru.sbt.mipt.oop.commandworkers.CommandType;
+import ru.sbt.mipt.oop.commandworkers.SensorCommand;
+import ru.sbt.mipt.oop.eventtypes.SensorEventType;
+import ru.sbt.mipt.oop.homedevices.Light;
+import ru.sbt.mipt.oop.homeparts.Room;
+import ru.sbt.mipt.oop.homeparts.SmartHome;
 
-import static ru.sbt.mipt.oop.EventTypes.SensorEventTypeLight.LIGHT_ON;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeLight.LIGHT_ON;
 
 public class SensorEventLight extends SensorEvent {
     public SensorEventLight(SensorEventType type, String objectId) {
         super(type, objectId);
     }
 
-    public static void allLightsOff(SmartHome smartHome) {
-        for (Room homeRoom : smartHome.getRooms()) {
-            for (Light light : homeRoom.getLights()) {
-                light.setOn(false);
-                CommandSender commandSender = new CommandSender();
-                SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
-                commandSender.sendCommand(command);
-            }
-        }
+
+
+    @Override
+    public String toString() {
+        return "SensorEvent{" +
+                "type=" + this.getType() +
+                ", objectId='" + this.getObjectId() + '\'' +
+                '}';
     }
 
     @Override

@@ -1,7 +1,7 @@
-package ru.sbt.mipt.oop.Events;
+package ru.sbt.mipt.oop.events;
 
-import ru.sbt.mipt.oop.EventTypes.SensorEventType;
-import ru.sbt.mipt.oop.HomeParts.SmartHome;
+import ru.sbt.mipt.oop.eventtypes.SensorEventType;
+import ru.sbt.mipt.oop.homeparts.SmartHome;
 
 public abstract class SensorEvent {
     private final SensorEventType type;
@@ -20,13 +20,7 @@ public abstract class SensorEvent {
         return objectId;
     }
 
-    @Override
-    public String toString() {
-        return "SensorEvent{" +
-                "type=" + type +
-                ", objectId='" + objectId + '\'' +
-                '}';
-    }
+    public abstract String toString();
 
     public abstract void performEvent(SmartHome smartHome);
 }

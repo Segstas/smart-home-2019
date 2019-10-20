@@ -1,12 +1,12 @@
-package ru.sbt.mipt.oop.Events;
+package ru.sbt.mipt.oop.events;
 
-import ru.sbt.mipt.oop.EventTypes.SensorEventType;
-import ru.sbt.mipt.oop.EventTypes.SensorEventTypeDoorAndLight;
+import ru.sbt.mipt.oop.eventtypes.SensorEventType;
+import ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight;
 
-import static ru.sbt.mipt.oop.EventTypes.SensorEventTypeDoorAndLight.*;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.*;
 
-public class EventProduser {
-    public static SensorEvent getNextSensorEvent() {
+public class EventProduserImplStub implements EventProduser {
+    public SensorEvent getNextSensorEvent() {
         // pretend like we're getting the events from physical world, but here we're going to just generate some random events
         if (Math.random() < 0.05) return null; // null means end of event stream
         SensorEventType sensorEventType = SensorEventTypeDoorAndLight.values()[(int) (4 * Math.random())];

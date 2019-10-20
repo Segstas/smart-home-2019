@@ -1,10 +1,10 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.HomeDevices.Door;
-import ru.sbt.mipt.oop.HomeDevices.Light;
-import ru.sbt.mipt.oop.HomeParts.*;
-import ru.sbt.mipt.oop.IOHelpers.SmartHomeWriter;
-import ru.sbt.mipt.oop.IOHelpers.SmartHomeWriterJSON;
+import ru.sbt.mipt.oop.homedevices.Door;
+import ru.sbt.mipt.oop.homedevices.Light;
+import ru.sbt.mipt.oop.homeparts.*;
+import ru.sbt.mipt.oop.iohelpers.SmartHomeWriter;
+import ru.sbt.mipt.oop.iohelpers.SmartHomeWriterJSON;
 
 import java.io.IOException;
 import java.util.Arrays;
