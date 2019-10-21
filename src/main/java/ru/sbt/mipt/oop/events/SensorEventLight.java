@@ -25,7 +25,7 @@ public class SensorEventLight extends SensorEvent {
                 '}';
     }
 
-    @Override
+  /*  @Override
     public void performEvent(SmartHome smartHome) {
         for (Room room : smartHome.getRooms()) {
             for (Light light : room.getLights()) {
@@ -40,6 +40,6 @@ public class SensorEventLight extends SensorEvent {
                 }
             }
         }
-    }
+    }*/
 
 }

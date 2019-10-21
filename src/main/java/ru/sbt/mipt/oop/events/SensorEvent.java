@@ -22,5 +22,5 @@ public abstract class SensorEvent {
 
     public abstract String toString();
 
-    public abstract void performEvent(SmartHome smartHome);
+    ////public abstract void performEvent(SmartHome smartHome);
 }

@@ -8,7 +8,7 @@ import ru.sbt.mipt.oop.homeparts.Room;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 
 public class LightScenarios implements Scenario {
-
+/*
     public static void allLightsOff(SmartHome smartHome) {
         for (Room homeRoom : smartHome.getRooms()) {
             for (Light light : homeRoom.getLights()) {
@@ -18,5 +18,5 @@ public class LightScenarios implements Scenario {
                 commandSender.sendCommand(command);
             }
         }
-    }
+    }*/
 }

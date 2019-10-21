@@ -23,7 +23,7 @@ public class SensorEventDoor extends SensorEvent {
                 '}';
     }
 
-    @Override
+   /* @Override
     public void performEvent(SmartHome smartHome) {
         // событие от двери
         for (Room room : smartHome.getRooms()) {
@@ -44,7 +44,7 @@ public class SensorEventDoor extends SensorEvent {
                 }
             }
         }
-    }
+    }*/
 
 }
 
