@@ -2,89 +2,67 @@ package ru.sbt.mipt.oop.eventprocessors;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import ru.sbt.mipt.oop.Actionable;
 import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.events.SensorEventDoor;
+import ru.sbt.mipt.oop.events.SensorEventLight;
 import ru.sbt.mipt.oop.eventtypes.SensorEventType;
 import ru.sbt.mipt.oop.homedevices.Door;
+import ru.sbt.mipt.oop.homedevices.Light;
+import ru.sbt.mipt.oop.homeparts.Room;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 import ru.sbt.mipt.oop.iohelpers.SmartHomeReader;
 import ru.sbt.mipt.oop.iohelpers.SmartHomeReaderJSON;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.DOOR_CLOSED;
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.DOOR_OPEN;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.*;
 
 public class DoorEventProcessorTest {
+    private SmartHome testHome;
+    private EventProcessor lightEventProcessor = new DoorEventProcessor();
 
+    @org.junit.jupiter.api.Test
 
-    private SmartHome smartHome;
-    private EventProcessor processor;
-    private List<String> openDoors;
-    private List<String> closedDoors;
-    private Random randomGenerator;
-
-    @Before
-    public void setUp() throws IOException {
-        SmartHomeReader smartHomeReader = new SmartHomeReaderJSON();
-        smartHome = smartHomeReader.read();
-        openDoors = getDoors(true);
-        closedDoors = getDoors(false);
-        randomGenerator = new Random();
+    void openDoorClosingTest() {
+        Door door1 = new Door(true,"1");
+        Door door2 = new Door(false, "2");
+        Collection<Door> doors1 = new ArrayList<>();
+        doors1.add(door1);
+        doors1.add(door2);
+        Collection<Light> lights1 = new ArrayList<>();
+        Room room1 = new Room(lights1,doors1,"hall");
+        testHome = new SmartHome();
+        testHome.addRoom(room1);
+        SensorEvent lightOffEvent = new SensorEventLight(DOOR_CLOSED,"1");
+        lightEventProcessor.process(testHome,lightOffEvent);
+        assertFalse(door1.isOpen());
     }
 
-    @Test
-    void doorsClosingTest() {
-        int randInt = randomGenerator.nextInt(closedDoors.size());
-        String doorId = closedDoors.get(randInt);
-        SensorEvent event = new SensorEventDoor(DOOR_OPEN, doorId);
+    @org.junit.jupiter.api.Test
+    void closedDoorOpeningTesr() {
+        Door door1 = new Door(true,"1");
+        Door door2 = new Door(false, "2");
+        Collection<Door> doors1 = new ArrayList<>();
+        doors1.add(door1);
+        doors1.add(door2);
+        Collection<Light> lights1 = new ArrayList<>();
+        Room room1 = new Room(lights1,doors1,"hall");
+        testHome = new SmartHome();
+        testHome.addRoom(room1);
+        SensorEvent lightOffEvent = new SensorEventLight(DOOR_OPEN,"2");
+        lightEventProcessor.process(testHome,lightOffEvent);
+        assertTrue(door2.isOpen());
 
-        processor.process(smartHome,event);
-        closedDoors.remove(doorId);
-        openDoors.add(doorId);
-
-        checkDoorsCondition(openDoors, true);
-        checkDoorsCondition(closedDoors, false);
     }
 
-    @Test
-    void testOpenDoorCloses() {
-        int randInt = randomGenerator.nextInt(openDoors.size());
-        String doorId = openDoors.get(randInt);
-        SensorEvent event = new SensorEventDoor(DOOR_CLOSED, doorId);
-
-        processor.process(smartHome,event);
-        openDoors.remove(doorId);
-        closedDoors.add(doorId);
-
-        checkDoorsCondition(openDoors, true);
-        checkDoorsCondition(closedDoors, false);
-    }
-
-    private List<String> getDoors(boolean condition) {
-        List<String> doors = new ArrayList<>();
-        smartHome.execute((Actionable actionable) -> {
-            if (!(actionable instanceof Door)) return;
-            Door door = (Door) actionable;
-            if (door.isOpen() == condition) {
-                doors.add(door.getId());
-            }
-        });
-        return doors;
-    }
-
-    private void checkDoorsCondition(List<String> doorIds, boolean condition) {
-        smartHome.execute((Actionable actionable) -> {
-            if (!(actionable instanceof Door)) return;
-            Door door = (Door) actionable;
-            if (!(doorIds.contains(door.getId()))) return;
-            assertEquals(door.isOpen(), condition);
-        });
-    }
 
 }

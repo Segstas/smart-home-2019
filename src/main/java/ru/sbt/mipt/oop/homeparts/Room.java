@@ -31,6 +31,13 @@ public class Room implements Actionable {
         return name;
     }
 
+    public boolean containsRightDoor(String id) {
+        for (Door door : doors) {
+            if (door.getId() == id) return true;
+        }
+        return false;
+    }
+
     @Override
     public void execute(Action action) {
         action.start(this);

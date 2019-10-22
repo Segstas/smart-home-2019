@@ -6,70 +6,62 @@ import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.oop.Actionable;
 import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.events.SensorEventLight;
+import ru.sbt.mipt.oop.homedevices.Door;
 import ru.sbt.mipt.oop.homedevices.Light;
+import ru.sbt.mipt.oop.homeparts.Room;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 import ru.sbt.mipt.oop.iohelpers.SmartHomeReader;
 import ru.sbt.mipt.oop.iohelpers.SmartHomeReaderJSON;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.LIGHT_OFF;
 import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.LIGHT_ON;
 
 class LightEventProcessorTest {
-    private SmartHome smartHome;
-    private EventProcessor processor;
-    private List<String> turnedOnLights;
-    private List<String> turnedOffLights;
-    private Random randomGenerator;
+    private SmartHome testHome;
+    private EventProcessor lightEventProcessor = new LightEventProcessor();
 
-    @BeforeEach
-    void setUp() throws IOException {
-        SmartHomeReader smartHomeReader = new SmartHomeReaderJSON();
-        smartHome = smartHomeReader.read();
-        turnedOnLights = getLights(true);
-        turnedOffLights = getLights(false);
-        randomGenerator = new Random();
+    @Test
+    void workingLightOffTest() {
+        Light light1 = new Light("1",true);
+        Light light2 = new Light("2",false);
+        Collection<Light> lights1 = new ArrayList<>();
+        lights1.add(light1);
+        lights1.add(light2);
+        Collection<Door> doors1 = new ArrayList<>();
+        Room room1 = new Room(lights1,doors1,"hall");
+        testHome = new SmartHome();
+        testHome.addRoom(room1);
+        SensorEvent lightOffEvent = new SensorEventLight(LIGHT_OFF,"1");
+        lightEventProcessor.process(testHome,lightOffEvent);
+        assertFalse(light1.isOn());
     }
 
     @Test
-    void testTurnedOffLightTurnsOn() {
-        int randInt = randomGenerator.nextInt(turnedOffLights.size());
-        String lightId = turnedOffLights.get(randInt);
-        SensorEvent event = new SensorEventLight(LIGHT_ON, lightId);
+    void notWorkingLightOnTest() {
+        Light light1 = new Light("1",true);
+        Light light2 = new Light("2",false);
+        Collection<Light> lights1 = new ArrayList<>();
+        lights1.add(light1);
+        lights1.add(light2);
+        Collection<Door> doors1 = new ArrayList<>();
+        Room room1 = new Room(lights1,doors1,"hall");
+        testHome = new SmartHome();
+        testHome.addRoom(room1);
+        SensorEvent lightOffEvent = new SensorEventLight(LIGHT_ON,"2");
+        lightEventProcessor.process(testHome,lightOffEvent);
+        assertTrue(light2.isOn());
 
-        processor.process(smartHome, event);
-        turnedOffLights.remove(lightId);
-        turnedOnLights.add(lightId);
-
-        checkLightsCondition(turnedOnLights, true);
-        checkLightsCondition(turnedOffLights, false);
-    }
-    
-    private List<String> getLights(boolean condition) {
-        List<String> lights = new ArrayList<>();
-        smartHome.execute(object -> {
-            if (!(object instanceof Light)) return;
-            Light light = (Light) object;
-            if (light.isOn() == condition) {
-                lights.add(light.getId());
-            }
-        });
-        return lights;
     }
 
-    private void checkLightsCondition(List<String> lightIds, boolean condition) {
-        smartHome.execute(object -> {
-            if (!(object instanceof Light)) return;
-            Light light = (Light) object;
-            if (!(lightIds.contains(light.getId()))) return;
-            assertEquals(light.isOn(), condition);
-        });
-    }
 
 
 }

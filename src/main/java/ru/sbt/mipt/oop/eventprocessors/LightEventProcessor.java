@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop.eventprocessors;
 
+import ru.sbt.mipt.oop.Action;
 import ru.sbt.mipt.oop.commandworkers.CommandSender;
 import ru.sbt.mipt.oop.commandworkers.CommandType;
 import ru.sbt.mipt.oop.commandworkers.SensorCommand;
@@ -21,18 +22,7 @@ public class LightEventProcessor  implements EventProcessor {
     public void process(SmartHome smartHome, SensorEvent event) {
         if (!(event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF)) return;
 
-        smartHome.execute(object -> {
-            if (!(object instanceof Room)) {
-                return ;
-            }
-            Room room = (Room) object;
-            if(isHallDoorEvent(event, room)){
-                turnOffLightInHome(smartHome);
-            }
-
-        });
-
-        smartHome.execute(object -> {
+        smartHome.execute(object  -> {
             if (!(object instanceof Light)) {
                 return ;
             }
@@ -41,23 +31,6 @@ public class LightEventProcessor  implements EventProcessor {
 
         });
 
-    }
-    private boolean isHallDoorEvent(SensorEvent event, Room room) {
-         return (room.getName().equals("hall") && event.getType().equals(DOOR_CLOSED));
-    }
-
-    private void turnOffLightInHome(SmartHome smartHome) {
-        smartHome.execute(smth -> {
-            if (!(smth instanceof Light)) {
-                return ;
-            }
-            Light light = (Light) smth;
-            light.setOn(false);
-            System.out.println("All lights was turned off");
-            CommandSender commandSender = new CommandSender();
-            SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
-            commandSender.sendCommand(command);
-        });
     }
 
     private void updateLightState(Light light, SensorEvent event) {

@@ -2,6 +2,7 @@ package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.eventprocessors.DoorEventProcessor;
 import ru.sbt.mipt.oop.eventprocessors.EventProcessor;
+import ru.sbt.mipt.oop.eventprocessors.HallDoorEventProcessor;
 import ru.sbt.mipt.oop.eventprocessors.LightEventProcessor;
 import ru.sbt.mipt.oop.events.EventProduser;
 import ru.sbt.mipt.oop.events.EventProduserImplStub;
@@ -39,6 +40,7 @@ public class Application {
         List<EventProcessor> processors = new ArrayList<>();
         processors.add(new DoorEventProcessor());
         processors.add(new LightEventProcessor());
+        processors.add(new HallDoorEventProcessor());
         return processors;
     }
 }
