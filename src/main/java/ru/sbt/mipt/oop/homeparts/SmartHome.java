@@ -2,7 +2,6 @@ package ru.sbt.mipt.oop.homeparts;
 
 import ru.sbt.mipt.oop.Action;
 import ru.sbt.mipt.oop.Actionable;
-import ru.sbt.mipt.oop.scenarios.Scenario;
 
 import java.util.ArrayList;
 import java.util.Collection;

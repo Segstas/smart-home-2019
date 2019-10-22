@@ -16,10 +16,6 @@ public class Door implements Actionable {
         return id;
     }
 
-    public void setOpen(boolean open) {
-        isOpen = open;
-    }
-
     @Override
     public void execute(Action action) {
         action.start(this);
@@ -27,5 +23,9 @@ public class Door implements Actionable {
 
     public boolean isOpen() {
         return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
     }
 }

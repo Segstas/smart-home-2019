@@ -24,6 +24,7 @@ public class HallDoorEventProcessor implements EventProcessor {
 
         });
     }
+
     private boolean isHallDoorEvent(SensorEvent event, Room room) {
         return (room.getName() == "hall" && event.getType() == DOOR_CLOSED && room.containsRightDoor(event.getObjectId()));
     }
@@ -31,7 +32,7 @@ public class HallDoorEventProcessor implements EventProcessor {
     private void turnOffLightInHome(SmartHome smartHome) {
         smartHome.execute(smth -> {
             if (!(smth instanceof Light)) {
-                return ;
+                return;
             }
             Light light = (Light) smth;
             light.setOn(false);

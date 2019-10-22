@@ -1,20 +1,11 @@
 package ru.sbt.mipt.oop.events;
 
-import ru.sbt.mipt.oop.commandworkers.CommandSender;
-import ru.sbt.mipt.oop.commandworkers.CommandType;
-import ru.sbt.mipt.oop.commandworkers.SensorCommand;
 import ru.sbt.mipt.oop.eventtypes.SensorEventType;
-import ru.sbt.mipt.oop.homedevices.Light;
-import ru.sbt.mipt.oop.homeparts.Room;
-import ru.sbt.mipt.oop.homeparts.SmartHome;
-
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeLight.LIGHT_ON;
 
 public class SensorEventLight extends SensorEvent {
     public SensorEventLight(SensorEventType type, String objectId) {
         super(type, objectId);
     }
-
 
 
     @Override

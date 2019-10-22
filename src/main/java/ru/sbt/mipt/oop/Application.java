@@ -21,22 +21,22 @@ public class Application {
         SmartHomeReader smartHomeReader = new SmartHomeReaderJSON();
         SmartHome smartHome = smartHomeReader.read();
         EventProduser eventProduser = new EventProduserImplStub();
-        List<EventProcessor> processors =  creareEventProcessorList();
+        List<EventProcessor> processors = creareEventProcessorList();
 
         // начинаем цикл обработки событий
         SensorEvent event = eventProduser.getNextSensorEvent();
 
 
-        while (event != null){
+        while (event != null) {
             System.out.println("Got event: " + event);
             for (EventProcessor processor : processors) {
-                processor.process(smartHome,event);
+                processor.process(smartHome, event);
             }
             event = eventProduser.getNextSensorEvent();
         }
     }
 
-    private static List<EventProcessor>  creareEventProcessorList() {
+    private static List<EventProcessor> creareEventProcessorList() {
         List<EventProcessor> processors = new ArrayList<>();
         processors.add(new DoorEventProcessor());
         processors.add(new LightEventProcessor());

@@ -1,12 +1,6 @@
 package ru.sbt.mipt.oop.events;
 
 import ru.sbt.mipt.oop.eventtypes.SensorEventType;
-import ru.sbt.mipt.oop.homedevices.Door;
-import ru.sbt.mipt.oop.homeparts.Room;
-import ru.sbt.mipt.oop.homeparts.SmartHome;
-import ru.sbt.mipt.oop.scenarios.LightScenarios;
-
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoor.DOOR_OPEN;
 
 public class SensorEventDoor extends SensorEvent {
 

@@ -1,7 +1,6 @@
 package ru.sbt.mipt.oop.events;
 
 import ru.sbt.mipt.oop.eventtypes.SensorEventType;
-import ru.sbt.mipt.oop.homeparts.SmartHome;
 
 public abstract class SensorEvent {
     private final SensorEventType type;
