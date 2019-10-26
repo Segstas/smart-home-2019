@@ -17,6 +17,11 @@ public class EventProduserImplStub implements EventProduser {
         if (sensorEventType == LIGHT_ON || sensorEventType == LIGHT_OFF) {
             return new SensorEventLight(sensorEventType, objectId);
         }
+        if (sensorEventType == ALARM_ACTIVATE || sensorEventType == ALARM_DEACTIVATE) {
+            int randomCode = 0 + (int) (Math.random() * 3); // Генерация 1-го числа
+            return new SensorEventSignalling(sensorEventType, objectId, Integer.toString(randomCode));
+        }
+
         return null;
     }
 }
