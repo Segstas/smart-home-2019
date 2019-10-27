@@ -9,7 +9,9 @@ public class SignalingDeactivatedState extends SignalingState {
 
     @Override
     public void activate(String code) {
-        signaling.setState(new SignalingDeactivatedState(signaling));
+        if (signaling.codeСomparison(code)) {
+            signaling.setState(new SignalingActivatedState(signaling));
+        }
     }
 
     @Override

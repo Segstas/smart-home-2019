@@ -1,9 +1,10 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.eventprocessors.DoorEventProcessor;
 import ru.sbt.mipt.oop.eventprocessors.EventProcessor;
-import ru.sbt.mipt.oop.eventprocessors.HallDoorEventProcessor;
-import ru.sbt.mipt.oop.eventprocessors.LightEventProcessor;
+import ru.sbt.mipt.oop.eventprocessors.basic.DoorEventProcessor;
+import ru.sbt.mipt.oop.eventprocessors.basic.HallDoorEventProcessor;
+import ru.sbt.mipt.oop.eventprocessors.basic.LightEventProcessor;
+import ru.sbt.mipt.oop.eventprocessors.decorators.EventProcessorDecorator;
 import ru.sbt.mipt.oop.events.EventProduser;
 import ru.sbt.mipt.oop.events.EventProduserImplStub;
 import ru.sbt.mipt.oop.events.SensorEvent;
@@ -40,9 +41,9 @@ public class Application {
 
     private static List<EventProcessor> creareEventProcessorList() {
         List<EventProcessor> processors = new ArrayList<>();
-        processors.add(new DoorEventProcessor());
-        processors.add(new LightEventProcessor());
-        processors.add(new HallDoorEventProcessor());
+        processors.add(new EventProcessorDecorator(new DoorEventProcessor()));
+        processors.add(new EventProcessorDecorator(new LightEventProcessor()));
+        processors.add(new EventProcessorDecorator(new HallDoorEventProcessor()));
         return processors;
     }
 }

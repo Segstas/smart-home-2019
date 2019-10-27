@@ -10,6 +10,8 @@ public abstract class SignalingState {
     }
 
     public abstract void activate(String code);
+
     public abstract void deactivate(String code);
+
     public abstract void enableAlarm();
 }

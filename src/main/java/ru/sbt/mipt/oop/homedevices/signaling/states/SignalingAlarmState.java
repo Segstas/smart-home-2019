@@ -3,13 +3,12 @@ package ru.sbt.mipt.oop.homedevices.signaling.states;
 import ru.sbt.mipt.oop.homedevices.signaling.Signaling;
 
 public class SignalingAlarmState extends SignalingState {
-    SignalingAlarmState(Signaling signaling) {
+    public SignalingAlarmState(Signaling signaling) {
         super(signaling);
     }
 
     @Override
     public void activate(String code) {
-
     }
 
     @Override

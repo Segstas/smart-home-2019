@@ -1,6 +1,7 @@
 package ru.sbt.mipt.oop.eventprocessors;
 
 import org.junit.jupiter.api.Test;
+import ru.sbt.mipt.oop.eventprocessors.basic.HallDoorEventProcessor;
 import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.events.SensorEventLight;
 import ru.sbt.mipt.oop.homedevices.Door;

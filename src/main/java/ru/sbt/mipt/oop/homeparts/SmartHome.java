@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class SmartHome implements Actionable {
-    public Signaling signaling;
+    Signaling signaling;
 
     Collection<Room> rooms;
 
@@ -20,17 +20,13 @@ public class SmartHome implements Actionable {
         this.rooms = rooms;
     }
 
-    public void setSignaling(Signaling signaling) {
-        this.signaling = signaling;
+    public void addRoom(Room room) {
+        rooms.add(room);
     }
 
    /* public void executeSignalingAction (){
         signaling.activate();
     }*/ ///добавить вызов методов сигнализации
-
-    public void addRoom(Room room) {
-        rooms.add(room);
-    }
 
     public Collection<Room> getRooms() {
         return rooms;
@@ -42,5 +38,13 @@ public class SmartHome implements Actionable {
         for (Room room : rooms) {
             room.execute(action);
         }
+    }
+
+    public Signaling getSignaling() {
+        return signaling;
+    }
+
+    public void setSignaling(Signaling signaling) {
+        this.signaling = signaling;
     }
 }

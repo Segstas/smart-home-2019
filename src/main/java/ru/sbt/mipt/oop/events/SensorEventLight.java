@@ -15,22 +15,4 @@ public class SensorEventLight extends SensorEvent {
                 ", objectId='" + this.getObjectId() + '\'' +
                 '}';
     }
-
-  /*  @Override
-    public void performEvent(SmartHome smartHome) {
-        for (Room room : smartHome.getRooms()) {
-            for (Light light : room.getLights()) {
-                if (light.getId().equals(this.getObjectId())) {
-                    if (this.getType() == LIGHT_ON) {
-                        light.setOn(true);
-                        System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned on.");
-                    } else {
-                        light.setOn(false);
-                        System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned off.");
-                    }
-                }
-            }
-        }
-    }*/
-
 }

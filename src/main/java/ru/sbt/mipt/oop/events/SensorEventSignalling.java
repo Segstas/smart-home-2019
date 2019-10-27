@@ -15,7 +15,7 @@ public class SensorEventSignalling extends SensorEvent {
     public String toString() {
         return "SensorEvent{" +
                 "type=" + this.getType() +
-                ", objectId='" + this.getObjectId() + '\'' +
+                ", code ='" + this.getCode() + '\'' +
                 '}';
     }
 

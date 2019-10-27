@@ -1,5 +1,6 @@
-package ru.sbt.mipt.oop.eventprocessors;
+package ru.sbt.mipt.oop.eventprocessors.basic;
 
+import ru.sbt.mipt.oop.eventprocessors.EventProcessor;
 import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.homedevices.Light;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
