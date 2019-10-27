@@ -13,7 +13,7 @@ public class Application {
     public static void main(String... args) throws IOException {
         // считываем состояние дома из файла
         SmartHomeReader smartHomeReader = new SmartHomeReaderJSON();
-        SmartHome smartHome = smartHomeReader.read();
+        SmartHome smartHome = smartHomeReader.readSmartHome();
         EventProduser eventProduser = new EventProduserImplStub();
 
         // начинаем цикл обработки событий

@@ -5,7 +5,7 @@ import ru.sbt.mipt.oop.homedevices.Light;
 
 import java.util.Collection;
 
-public abstract class Room {
+public class Room {
     private Collection<Light> lights;
     private Collection<Door> doors;
     private String name;
