@@ -14,7 +14,7 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.DOOR_CLOSED;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.DOOR_CLOSED;
 
 public class HallDoorEventProcessorTest {
     private SmartHome testHome;

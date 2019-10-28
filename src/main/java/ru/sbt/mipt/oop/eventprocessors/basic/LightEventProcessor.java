@@ -5,8 +5,8 @@ import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.homedevices.Light;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.LIGHT_OFF;
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.LIGHT_ON;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.LIGHT_OFF;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.LIGHT_ON;
 
 public class LightEventProcessor implements EventProcessor {
 

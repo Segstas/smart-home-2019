@@ -15,4 +15,5 @@ public class SensorEventLight extends SensorEvent {
                 ", objectId='" + this.getObjectId() + '\'' +
                 '}';
     }
+
 }

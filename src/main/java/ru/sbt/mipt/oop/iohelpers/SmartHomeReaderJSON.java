@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 public class SmartHomeReaderJSON implements SmartHomeReader {
 
     @Override
-    public SmartHome read() {
+    public SmartHome readSmartHome() {
         Gson gson = new Gson();
         String json = null;
         try {

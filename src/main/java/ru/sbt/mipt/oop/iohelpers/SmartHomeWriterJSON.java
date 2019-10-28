@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 public class SmartHomeWriterJSON implements SmartHomeWriter {
 
     @Override
-    public void write(SmartHome smartHome) {
+    public void writeSmartHome(SmartHome smartHome) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(smartHome);
         System.out.println(jsonString);

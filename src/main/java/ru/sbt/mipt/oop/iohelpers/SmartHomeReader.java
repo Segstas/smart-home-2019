@@ -4,5 +4,5 @@ import ru.sbt.mipt.oop.homeparts.SmartHome;
 
 
 public interface SmartHomeReader {
-    public SmartHome read();
+    public SmartHome readSmartHome();
 }

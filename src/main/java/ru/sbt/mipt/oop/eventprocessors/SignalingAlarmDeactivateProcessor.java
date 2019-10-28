@@ -4,7 +4,7 @@ import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.events.SensorEventSignalling;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.ALARM_DEACTIVATE;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.ALARM_DEACTIVATE;
 
 public class SignalingAlarmDeactivateProcessor implements EventProcessor {
     @Override

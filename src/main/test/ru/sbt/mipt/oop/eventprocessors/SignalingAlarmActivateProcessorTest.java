@@ -3,20 +3,15 @@ package ru.sbt.mipt.oop.eventprocessors;
 import org.junit.Before;
 import org.junit.Test;
 import ru.sbt.mipt.oop.events.SensorEventSignalling;
-import ru.sbt.mipt.oop.homedevices.Door;
-import ru.sbt.mipt.oop.homedevices.Light;
 import ru.sbt.mipt.oop.homedevices.signaling.Signaling;
 import ru.sbt.mipt.oop.homedevices.signaling.states.SignalingActivatedState;
 import ru.sbt.mipt.oop.homedevices.signaling.states.SignalingAlarmState;
 import ru.sbt.mipt.oop.homedevices.signaling.states.SignalingDeactivatedState;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.ALARM_ACTIVATE;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.ALARM_ACTIVATE;
 
 public class SignalingAlarmActivateProcessorTest {
     SmartHome testHome;
