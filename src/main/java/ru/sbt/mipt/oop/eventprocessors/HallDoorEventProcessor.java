@@ -9,7 +9,7 @@ import ru.sbt.mipt.oop.homedevices.Light;
 import ru.sbt.mipt.oop.homeparts.Room;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.DOOR_CLOSED;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.DOOR_CLOSED;
 
 public class HallDoorEventProcessor implements EventProcessor {
     public void process(SmartHome smartHome, SensorEvent event) {

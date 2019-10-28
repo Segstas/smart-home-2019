@@ -28,7 +28,7 @@ public class HomeBuilder {
         SmartHome smartHome = new SmartHome(Arrays.asList(kitchen, bathroom, bedroom, hall));
 
         smartHomeWriter = new SmartHomeWriterJSON();
-        smartHomeWriter.write(smartHome);
+        smartHomeWriter.writeSmartHome(smartHome);
     }
 
 }

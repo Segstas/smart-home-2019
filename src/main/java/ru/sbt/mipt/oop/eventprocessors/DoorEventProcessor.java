@@ -4,8 +4,8 @@ import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.homedevices.Door;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.DOOR_CLOSED;
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.DOOR_OPEN;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.DOOR_CLOSED;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.DOOR_OPEN;
 
 
 public class DoorEventProcessor implements EventProcessor {

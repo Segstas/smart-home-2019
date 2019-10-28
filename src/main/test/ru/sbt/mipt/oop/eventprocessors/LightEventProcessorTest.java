@@ -14,8 +14,8 @@ import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.LIGHT_OFF;
-import static ru.sbt.mipt.oop.eventtypes.SensorEventTypeDoorAndLight.LIGHT_ON;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.LIGHT_OFF;
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.LIGHT_ON;
 
 class LightEventProcessorTest {
     private SmartHome testHome;
