@@ -17,8 +17,12 @@ public class EventHandler {
     private List<EventProcessor> processors = creareEventProcessorList();
 
 
-    EventHandler(EventProduser eventProduser, SmartHome smartHome) {
+    protected EventHandler(EventProduser eventProduser, SmartHome smartHome) {
         this.eventProduser = eventProduser;
+        this.smartHome = smartHome;
+    }
+
+    public EventHandler(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 

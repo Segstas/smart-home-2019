@@ -2,6 +2,7 @@ package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.events.EventProduser;
 import ru.sbt.mipt.oop.events.EventProduserImplStub;
+import ru.sbt.mipt.oop.events.adapters.AdapterEventHandler;
 import ru.sbt.mipt.oop.homedevices.signaling.Signaling;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 import ru.sbt.mipt.oop.iohelpers.SmartHomeReader;
@@ -17,9 +18,8 @@ public class Application {
 
         SmartHome smartHome = smartHomeReader.readSmartHome();
         smartHome.setSignaling(new Signaling("1"));
-        EventProduser eventProduser = new EventProduserImplStub();
-
-        EventHandler eventHandler = new EventHandler(eventProduser, smartHome);
+       
+        EventHandler eventHandler = new AdapterEventHandler(smartHome);
         eventHandler.work();
 
     }
