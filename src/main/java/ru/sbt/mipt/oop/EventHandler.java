@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.sbt.mipt.oop.eventprocessors.EventProcessor;
 import ru.sbt.mipt.oop.eventprocessors.basic.DoorEventProcessor;
 import ru.sbt.mipt.oop.eventprocessors.basic.HallDoorEventProcessor;
@@ -13,6 +14,8 @@ import java.util.List;
 
 public class EventHandler {
     private EventProduser eventProduser;
+
+    @Autowired
     private SmartHome smartHome;
     private List<EventProcessor> processors = creareEventProcessorList();
 
