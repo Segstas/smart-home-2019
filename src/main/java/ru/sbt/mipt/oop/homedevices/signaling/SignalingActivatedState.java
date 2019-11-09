@@ -1,6 +1,4 @@
-package ru.sbt.mipt.oop.homedevices.signaling.states;
-
-import ru.sbt.mipt.oop.homedevices.signaling.Signaling;
+package ru.sbt.mipt.oop.homedevices.signaling;
 
 public class SignalingActivatedState extends SignalingState {
 
@@ -14,7 +12,7 @@ public class SignalingActivatedState extends SignalingState {
 
     @Override
     public void deactivate(String code) {
-        if (signaling.codeСomparison(code)) {
+        if (signaling.compareCodes(code)) {
             signaling.setState(new SignalingDeactivatedState(signaling));
         } else {
             this.enableAlarm();

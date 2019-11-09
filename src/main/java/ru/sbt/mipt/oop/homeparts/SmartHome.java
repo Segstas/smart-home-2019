@@ -24,14 +24,6 @@ public class SmartHome implements Actionable {
         rooms.add(room);
     }
 
-   /* public void executeSignalingAction (){
-        signaling.activate();
-    }*/ ///добавить вызов методов сигнализации
-
-    public Collection<Room> getRooms() {
-        return rooms;
-    }
-
     @Override
     public void execute(Action action) {
         action.start(this);
