@@ -2,6 +2,8 @@ package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.commandworkers.CommandSender;
 import ru.sbt.mipt.oop.eventprocessors.EventProcessor;
+import ru.sbt.mipt.oop.eventprocessors.SignalingAlarmActivateProcessor;
+import ru.sbt.mipt.oop.eventprocessors.SignalingAlarmDeactivateProcessor;
 import ru.sbt.mipt.oop.eventprocessors.basic.DoorEventProcessor;
 import ru.sbt.mipt.oop.eventprocessors.basic.HallDoorEventProcessor;
 import ru.sbt.mipt.oop.eventprocessors.basic.LightEventProcessor;
@@ -29,6 +31,9 @@ public class EventHandler {
         processors.add(new EventProcessorDecorator(new DoorEventProcessor()));
         processors.add(new EventProcessorDecorator(new LightEventProcessor()));
         processors.add(new EventProcessorDecorator(new HallDoorEventProcessor(new CommandSender())));
+        processors.add(new EventProcessorDecorator(new SignalingAlarmActivateProcessor()));
+        processors.add(new EventProcessorDecorator(new SignalingAlarmDeactivateProcessor()));
+
         return processors;
     }
 
