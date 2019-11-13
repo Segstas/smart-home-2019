@@ -24,7 +24,7 @@ public class AdapterEventHandler extends EventHandler {
     }
 
 
-    public void work() {
+    public void handleEvent() {
         sensorEventsManager.registerEventHandler(event -> {
             System.out.println(returnComparableEvent(event));
         });

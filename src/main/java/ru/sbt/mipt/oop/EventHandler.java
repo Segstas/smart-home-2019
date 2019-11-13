@@ -37,7 +37,7 @@ public class EventHandler {
         return processors;
     }
 
-    public void work() {
+    public void handleEvent() {
         SensorEvent event = eventProduser.getNextSensorEvent();
         while (event != null) {
             System.out.println("Got event: " + event);

@@ -2,12 +2,7 @@ package ru.sbt.mipt.oop.remotecontrol;
 
 public class Button {
     private final String buttonName;
-    private ActionListener actionListener;
 
-
-    public void setActionListener(ActionListener actionListener) {
-        this.actionListener = actionListener;
-    }
 
     public Command getCommand() {
         return command;
@@ -19,7 +14,7 @@ public class Button {
 
     private Command command;
 
-    public Button(String buttonName) {
+    Button(String buttonName) {
         this.buttonName = buttonName;
     }
 
