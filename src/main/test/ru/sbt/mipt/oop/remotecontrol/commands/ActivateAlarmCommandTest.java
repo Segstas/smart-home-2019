@@ -2,12 +2,11 @@ package ru.sbt.mipt.oop.remotecontrol.commands;
 
 import org.junit.Test;
 import ru.sbt.mipt.oop.homedevices.signaling.Signaling;
-import ru.sbt.mipt.oop.homedevices.signaling.states.SignalingActivatedState;
-import ru.sbt.mipt.oop.homedevices.signaling.states.SignalingAlarmState;
+import ru.sbt.mipt.oop.homedevices.signaling.SignalingAlarmState;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ActivateAlarmCommandTest {
 

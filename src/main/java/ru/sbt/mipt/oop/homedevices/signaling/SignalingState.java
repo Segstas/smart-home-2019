@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.homedevices.signaling.states;
+package ru.sbt.mipt.oop.homedevices.signaling;
 
 import ru.sbt.mipt.oop.homedevices.signaling.Signaling;
 

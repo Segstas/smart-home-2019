@@ -9,7 +9,7 @@ import ru.sbt.mipt.oop.remotecontrol.Command;
 public class CloseEntranceDoorCommand implements Command {
     private SmartHome smartHome;
 
-    public CloseEntranceDoorCommand(SmartHome smartHome, HallDoorEventProcessor hallDoorEventProcessor) {
+    public CloseEntranceDoorCommand(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 

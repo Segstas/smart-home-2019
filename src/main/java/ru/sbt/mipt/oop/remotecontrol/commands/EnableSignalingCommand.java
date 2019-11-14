@@ -12,8 +12,10 @@ public class EnableSignalingCommand implements Command {
         this.smartHome = smartHome;
         this.code = code;
     }
+
     @Override
     public void execute() {
-        smartHome.getSignaling().activate(this.code);
+        if (smartHome.getSignaling() != null)
+            smartHome.getSignaling().activate(this.code);
     }
 }

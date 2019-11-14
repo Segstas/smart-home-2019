@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.sbt.mipt.oop.events.SensorEventSignalling;
 import ru.sbt.mipt.oop.homedevices.signaling.Signaling;
-import ru.sbt.mipt.oop.homedevices.signaling.states.SignalingActivatedState;
-import ru.sbt.mipt.oop.homedevices.signaling.states.SignalingAlarmState;
-import ru.sbt.mipt.oop.homedevices.signaling.states.SignalingDeactivatedState;
+import ru.sbt.mipt.oop.homedevices.signaling.SignalingActivatedState;
+import ru.sbt.mipt.oop.homedevices.signaling.SignalingAlarmState;
+import ru.sbt.mipt.oop.homedevices.signaling.SignalingDeactivatedState;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -26,23 +26,13 @@ public class SignalingAlarmActivateProcessorTest {
     }
 
     @Test
-    public void signallingActivateDeactovatedWithRightCodeTest() {
+    public void signallingActivateDeactivatedWithWrongCodeTest() {
         signaling.setState(new SignalingDeactivatedState(signaling));
         testHome.setSignaling(signaling);
         SensorEventSignalling sensorEventSignalling = new SensorEventSignalling(ALARM_ACTIVATE, "0", "1234");
         signalingAlarmActivateProcessor.process(testHome, sensorEventSignalling);
 
         assertThat(testHome.getSignaling().getState(), instanceOf(SignalingActivatedState.class));
-    }
-
-    @Test
-    public void signallingActivateDeactovatedWithWrongCodeTest() {
-        signaling.setState(new SignalingDeactivatedState(signaling));
-        testHome.setSignaling(signaling);
-        SensorEventSignalling sensorEventSignalling = new SensorEventSignalling(ALARM_ACTIVATE, "0", "wrong");
-        signalingAlarmActivateProcessor.process(testHome, sensorEventSignalling);
-
-        assertThat(testHome.getSignaling().getState(), instanceOf(SignalingDeactivatedState.class));
     }
 
     @Test

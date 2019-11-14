@@ -9,7 +9,7 @@ public class TurnOffLightsCommand implements Command {
     private SmartHome smartHome;
 
 
-    public TurnOffLightsCommand(SmartHome smartHome, LightEventProcessor lightEventProcessor) {
+    public TurnOffLightsCommand(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 

@@ -10,10 +10,10 @@ public class SignalingAlarmActivateProcessor implements EventProcessor {
     @Override
     public void process(SmartHome smartHome, SensorEvent event) {
         if (!(event.getType() == ALARM_ACTIVATE)) return;
-        smartHome.getSignaling().activate(isInstanseOfSignallingEvent(event).getCode());
+        smartHome.getSignaling().activate(isInstanseOfSignallingEventGetCode(event));
     }
 
-    private SensorEventSignalling isInstanseOfSignallingEvent(SensorEvent event) {
-        return (event instanceof SensorEventSignalling ? ((SensorEventSignalling) event) : null);
+    private String isInstanseOfSignallingEventGetCode(SensorEvent event) {
+        return (event instanceof SensorEventSignalling ? ((SensorEventSignalling) event).getCode() : "");
     }
 }

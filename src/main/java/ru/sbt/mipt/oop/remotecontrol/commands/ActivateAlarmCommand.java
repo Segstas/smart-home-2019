@@ -14,6 +14,7 @@ public class ActivateAlarmCommand implements Command {
 
     @Override
     public void execute() {
+        if (smartHome.getSignaling() != null)
         this.smartHome.getSignaling().triggerAlert();
     }
 }

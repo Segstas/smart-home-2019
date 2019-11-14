@@ -1,10 +1,9 @@
 package ru.sbt.mipt.oop.homedevices.signaling;
 
-import ru.sbt.mipt.oop.homedevices.signaling.states.SignalingDeactivatedState;
-import ru.sbt.mipt.oop.homedevices.signaling.states.SignalingState;
-
 public class Signaling {
-    private final String code;
+
+
+    private String code;
     private String id;
     private SignalingState state;
 
@@ -15,8 +14,8 @@ public class Signaling {
     }
 
 
-    public boolean codeСomparison(String сomparisСode) {
-        return сomparisСode == code;
+    boolean compareCodes(String receivedCode) {
+        return receivedCode.equals(code);
     }
 
     public SignalingState getState() {
@@ -39,7 +38,7 @@ public class Signaling {
         state.enableAlarm();
     }
 
-    public void setId(String id) {
-        this.id = id;
+    void setCode(String code) {
+        this.code = code;
     }
 }
