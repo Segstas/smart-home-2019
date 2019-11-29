@@ -22,7 +22,7 @@ public class EventHandler {
 
     @Autowired
     private SmartHome smartHome;
-    private List<EventProcessor> processors = creareEventProcessorList();
+    private List<EventProcessor> processors;
 
 
     protected EventHandler(EventProduser eventProduser, SmartHome smartHome) {

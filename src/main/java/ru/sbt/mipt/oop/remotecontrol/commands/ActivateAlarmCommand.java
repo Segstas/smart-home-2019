@@ -7,7 +7,7 @@ public class ActivateAlarmCommand implements Command {
 
     private SmartHome smartHome;
 
-    ActivateAlarmCommand(SmartHome smartHome) {
+    public ActivateAlarmCommand(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 

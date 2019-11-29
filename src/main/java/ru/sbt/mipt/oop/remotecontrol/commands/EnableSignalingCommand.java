@@ -6,11 +6,15 @@ import ru.sbt.mipt.oop.remotecontrol.Command;
 
 public class EnableSignalingCommand implements Command {
     private SmartHome smartHome;
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     private String code;
 
-    public EnableSignalingCommand(SmartHome smartHome, String code) {
+    public EnableSignalingCommand(SmartHome smartHome) {
         this.smartHome = smartHome;
-        this.code = code;
     }
 
     @Override

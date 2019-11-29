@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop;
 
+import com.coolcompany.smarthome.events.SensorEventsManager;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -13,8 +14,8 @@ public class Application {
 
     public static void main(String... args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-        EventHandler eventHandler = context.getBean(EventHandler.class);
-        eventHandler.handleEvent();
+        SensorEventsManager sensorEventsManager = context.getBean(SensorEventsManager.class);
+        sensorEventsManager.start();
     }
 }
 

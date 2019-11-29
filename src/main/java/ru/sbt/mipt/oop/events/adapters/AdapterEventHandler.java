@@ -1,57 +1,59 @@
 package ru.sbt.mipt.oop.events.adapters;
 
 import com.coolcompany.smarthome.events.CCSensorEvent;
+import com.coolcompany.smarthome.events.EventHandler;
 import com.coolcompany.smarthome.events.SensorEventsManager;
-import ru.sbt.mipt.oop.EventHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.sbt.mipt.oop.eventprocessors.EventProcessor;
 import ru.sbt.mipt.oop.events.EventProduser;
 import ru.sbt.mipt.oop.events.SensorEvent;
-import ru.sbt.mipt.oop.events.SensorEventDoor;
-import ru.sbt.mipt.oop.events.SensorEventLight;
+import ru.sbt.mipt.oop.events.factories.SensorEventDoorFactory;
+import ru.sbt.mipt.oop.events.factories.SensorEventFactory;
+import ru.sbt.mipt.oop.events.factories.SensorEventLightFactory;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static ru.sbt.mipt.oop.eventtypes.SensorEventType.*;
 
-public class AdapterEventHandler extends EventHandler {
-    SensorEventsManager sensorEventsManager = new SensorEventsManager();
-    SensorEvent sensorEvent;
+public class AdapterEventHandler implements EventHandler {
 
-    public AdapterEventHandler(EventProduser eventProduser, SmartHome smartHome) {
-        super(eventProduser, smartHome);
+
+    @Autowired
+    private SmartHome smartHome;
+    @Autowired
+    private List<EventProcessor> eventProcessors;
+
+    private Map<String, SensorEventFactory> sensorEventFactoryMap = new HashMap<>();
+
+    public AdapterEventHandler() {
+        fillSensorEventFactory();
     }
 
-    public AdapterEventHandler(SmartHome smartHome) {
-        super(smartHome);
+
+    private void fillSensorEventFactory() {
+        sensorEventFactoryMap.put("LightIsOn", new SensorEventLightFactory(LIGHT_ON));
+        sensorEventFactoryMap.put("LightIsOff", new SensorEventLightFactory(LIGHT_OFF));
+        sensorEventFactoryMap.put("DoorIsOpen", new SensorEventDoorFactory(DOOR_OPEN));
+        sensorEventFactoryMap.put("DoorIsClosed", new SensorEventDoorFactory(DOOR_CLOSED));
+        sensorEventFactoryMap.put("DoorIsLocked", new SensorEventDoorFactory(DOOR_CLOSED));
+        sensorEventFactoryMap.put("DoorIsUnlocked", new SensorEventDoorFactory(DOOR_OPEN));
+
     }
 
-
-    public void handleEvent() {
-        sensorEventsManager.registerEventHandler(event -> {
-            System.out.println(returnComparableEvent(event));
-        });
-        sensorEventsManager.start();
-    }
 
     private SensorEvent returnComparableEvent(CCSensorEvent event) {
-        switch (event.getEventType()) {
-            case "LightIsOn":
-                sensorEvent = new SensorEventLight(LIGHT_ON, event.getObjectId());
-                break;
-            case "LightIsOff":
-                sensorEvent = new SensorEventLight(LIGHT_OFF, event.getObjectId());
-                break;
-            case "DoorIsOpen":
-                sensorEvent = new SensorEventDoor(DOOR_OPEN, event.getObjectId());
-                break;
-            case "DoorIsClosed":
-                sensorEvent = new SensorEventDoor(DOOR_CLOSED, event.getObjectId());
-                break;
-            case "DoorIsLocked":
-                sensorEvent = new SensorEventDoor(DOOR_CLOSED, event.getObjectId());
-                break;
-            case "DoorIsUnlocked":
-                sensorEvent = new SensorEventDoor(DOOR_OPEN, event.getObjectId());
-                break;
+        return sensorEventFactoryMap.get(event.getEventType()).generateSensorEvent(event.getObjectId());
+    }
+
+    @Override
+    public void handleEvent(CCSensorEvent event) {
+        SensorEvent basicEvent = this.returnComparableEvent(event);
+        System.out.println("Got event: " + basicEvent);
+        for (EventProcessor processor : eventProcessors) {
+            processor.process(smartHome, basicEvent);
         }
-        return sensorEvent;
     }
 }

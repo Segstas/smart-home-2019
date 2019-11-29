@@ -14,7 +14,7 @@ public class Button {
 
     private Command command;
 
-    Button(String buttonName) {
+    public Button(String buttonName) {
         this.buttonName = buttonName;
     }
 

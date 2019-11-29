@@ -16,7 +16,8 @@ public class EnableSignalingCommandTest {
         SmartHome testHome = new SmartHome();
         Signaling signaling = new Signaling("1234");
         testHome.setSignaling(signaling);
-        EnableSignalingCommand enableSignalingCommand = new EnableSignalingCommand(testHome, "24242");
+        EnableSignalingCommand enableSignalingCommand = new EnableSignalingCommand(testHome);
+        enableSignalingCommand.setCode("1234");
         enableSignalingCommand.execute();
         assertThat(testHome.getSignaling().getState(), instanceOf(SignalingActivatedState.class));
     }
