@@ -14,6 +14,9 @@ import ru.sbt.mipt.oop.eventprocessors.basic.HallDoorEventProcessor;
 import ru.sbt.mipt.oop.eventprocessors.basic.LightEventProcessor;
 import ru.sbt.mipt.oop.eventprocessors.decorators.EventProcessorDecorator;
 import ru.sbt.mipt.oop.events.adapters.AdapterEventHandler;
+import ru.sbt.mipt.oop.events.factories.SensorEventDoorFactory;
+import ru.sbt.mipt.oop.events.factories.SensorEventFactory;
+import ru.sbt.mipt.oop.events.factories.SensorEventLightFactory;
 import ru.sbt.mipt.oop.homedevices.signaling.Signaling;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
 import ru.sbt.mipt.oop.iohelpers.SmartHomeReader;
@@ -22,9 +25,9 @@ import ru.sbt.mipt.oop.remotecontrol.Button;
 import ru.sbt.mipt.oop.remotecontrol.RemoteController;
 import ru.sbt.mipt.oop.remotecontrol.commands.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+
+import static ru.sbt.mipt.oop.eventtypes.SensorEventType.*;
 
 @Configuration
 public class SpringConfiguration {
@@ -54,21 +57,11 @@ public class SpringConfiguration {
         return new EventProcessorDecorator(new SignalingAlarmDeactivateProcessor());
     }
 
-    @Bean
-    Collection<EventProcessor> eventProcessors() {
-        List<EventProcessor> processors = new ArrayList<>();
-        processors.add(doorEventProcessor());
-        processors.add(lightEventProcessor());
-        processors.add(hallDoorEventProcessor());
-        processors.add(signalingAlarmActivateProcessor());
-        processors.add(signalingAlarmDeactivateProcessor());
-        return processors;
-    }
 
     @Bean
-    SensorEventsManager sensorEventsManager() {
+    SensorEventsManager sensorEventsManager(Collection<EventProcessor> eventProcessors) {
         SensorEventsManager sensorEventsManager = new SensorEventsManager();
-        sensorEventsManager.registerEventHandler(eventHandler());
+        sensorEventsManager.registerEventHandler(eventHandler(eventProcessors));
         return sensorEventsManager;
     }
 
@@ -88,8 +81,19 @@ public class SpringConfiguration {
     }
 
     @Bean
-    EventHandler eventHandler() {
-        return new AdapterEventHandler();
+    EventHandler eventHandler(Collection<EventProcessor> eventProcessors) {
+        return new AdapterEventHandler(smartHome(), eventProcessors, fillSensorEventFactory());
+    }
+
+    private Map<String, SensorEventFactory> fillSensorEventFactory() {
+        Map<String, SensorEventFactory> sensorEventFactoryMap = new HashMap<>();
+        sensorEventFactoryMap.put("LightIsOn", new SensorEventLightFactory(LIGHT_ON));
+        sensorEventFactoryMap.put("LightIsOff", new SensorEventLightFactory(LIGHT_OFF));
+        sensorEventFactoryMap.put("DoorIsOpen", new SensorEventDoorFactory(DOOR_OPEN));
+        sensorEventFactoryMap.put("DoorIsClosed", new SensorEventDoorFactory(DOOR_CLOSED));
+        sensorEventFactoryMap.put("DoorIsLocked", new SensorEventDoorFactory(DOOR_CLOSED));
+        sensorEventFactoryMap.put("DoorIsUnlocked", new SensorEventDoorFactory(DOOR_OPEN));
+        return sensorEventFactoryMap;
     }
 
     @Bean
@@ -110,8 +114,8 @@ public class SpringConfiguration {
         remoteController.setButton("2", new Button("2"));
         remoteController.setButton("3", new Button("3"));
         remoteController.setButton("4", new Button("4"));
-        remoteController.setCommand("A" ,activateAlarmCommand());
-        remoteController.setCommand("B",closeEntranceDoorCommand());
+        remoteController.setCommand("A", activateAlarmCommand());
+        remoteController.setCommand("B", closeEntranceDoorCommand());
         remoteController.setCommand("C", enableSignalingCommand());
         remoteController.setCommand("D", turnOffLightsCommand());
         remoteController.setCommand("1", turnOnAllLightsCommand());

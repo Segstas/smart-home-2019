@@ -2,6 +2,7 @@ package ru.sbt.mipt.oop.eventprocessors.decorators;
 
 import ru.sbt.mipt.oop.eventprocessors.EventProcessor;
 import ru.sbt.mipt.oop.events.SensorEvent;
+import ru.sbt.mipt.oop.eventtypes.SensorEventType;
 import ru.sbt.mipt.oop.homedevices.signaling.SignalingActivatedState;
 import ru.sbt.mipt.oop.homedevices.signaling.SignalingAlarmState;
 import ru.sbt.mipt.oop.homeparts.SmartHome;
@@ -25,6 +26,8 @@ public class EventProcessorDecorator implements EventProcessor {
             smartHome.getSignaling().triggerAlert();
             System.out.println("Sending sms");
         }
+
+        if (event.getType()==SensorEventType.UNKNOWN) return;
 
         eventProcessor.process(smartHome, event);
     }
